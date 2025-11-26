@@ -44,7 +44,7 @@ import java.nio.ByteBuffer;
 import static com.falsepattern.endlessids.constants.ExtendedConstants.blocksPerSubChunk;
 
 //NOTE: Also change the save logic in MapWriter mod if changing this
-public class BlockMetaManager implements DataManager.PacketDataManager, DataManager.SubChunkDataManager, DataManager.BlockPacketDataManager {
+public class BlockMetaManager implements DataManager.PacketDataManager, DataManager.CubicPacketDataManager, DataManager.SubChunkDataManager, DataManager.BlockPacketDataManager {
 
     @Override
     public String domain() {
@@ -232,5 +232,61 @@ public class BlockMetaManager implements DataManager.PacketDataManager, DataMana
     @Override
     public void readBlockPacketFromBuffer(S23PacketBlockChange packet, PacketBuffer buffer) {
         packet.field_148884_e = buffer.readUnsignedShort();
+    }
+
+    @Override
+    public int maxPacketSizeCubic() {
+        return 2 * 16 * 16 * 16 + 4;
+    }
+
+    @Override
+    public void writeToBuffer(Chunk chunk, ExtendedBlockStorage extendedBlockStorage, ByteBuffer data) {
+        val subChunk = (SubChunkBlockHook) extendedBlockStorage;
+
+        data.put((byte) subChunk.eid$getMetadataMask());
+
+        val m1Low = subChunk.eid$getM1Low();
+        data.put(m1Low.data);
+
+        val m1High = subChunk.eid$getM1High();
+        if (m1High == null) return;
+        data.put(m1High.data);
+
+        val m2 = subChunk.eid$getM2();
+        if (m2 != null) {
+            data.put(m2);
+        }
+    }
+
+    @Override
+    public void readFromBuffer(Chunk chunk, ExtendedBlockStorage extendedBlockStorage, ByteBuffer data) {
+        val subChunk = (SubChunkBlockHook) extendedBlockStorage;
+        val storageFlag = data.get();
+
+        val m1Low = subChunk.eid$getM1Low();
+        data.get(m1Low.data);
+
+        if (storageFlag == 0b01) {
+            subChunk.eid$setM1High(null);
+            subChunk.eid$setM2(null);
+            return;
+        }
+
+        var m1High = subChunk.eid$getM1High();
+        if (m1High == null) {
+            m1High = subChunk.eid$createM1High();
+        }
+        data.get(m1High.data);
+
+        if (storageFlag == 0b10) {
+            subChunk.eid$setM2(null);
+            return;
+        }
+
+        var m2 = subChunk.eid$getM2();
+        if (m2 == null) {
+            m2 = subChunk.eid$createM2();
+        }
+        data.get(m2);
     }
 }
