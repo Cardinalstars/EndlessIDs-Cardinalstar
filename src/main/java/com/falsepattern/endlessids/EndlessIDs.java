@@ -42,7 +42,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
      version = Tags.VERSION,
      name = Tags.MODNAME,
      acceptedMinecraftVersions = "[1.7.10]",
-     dependencies = "required-after:chunkapi@[0.6.4,);" +
+     dependencies = "required-after:chunkapi@[0.8.0,);" +
                     "required-after:falsepatternlib@[1.9.0,);" +
                     "after:antiidconflict")
 public class EndlessIDs {

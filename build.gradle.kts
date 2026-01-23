@@ -65,7 +65,7 @@ dependencies {
     // region Our deps
     implementationSplit("com.falsepattern:falsepatternlib-mc1.7.10:1.9.0")
     compileOnly("it.unimi.dsi:fastutil:8.5.16")
-    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.6.4")
+    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.8.0")
     // endregion
 
     // region maintained mods
