@@ -78,6 +78,7 @@ import static com.falsepattern.endlessids.mixin.plugin.TargetMod.Netherlicious;
 import static com.falsepattern.endlessids.mixin.plugin.TargetMod.NomadicTents;
 import static com.falsepattern.endlessids.mixin.plugin.TargetMod.NuclearTech;
 import static com.falsepattern.endlessids.mixin.plugin.TargetMod.OldWorldGen;
+import static com.falsepattern.endlessids.mixin.plugin.TargetMod.PersonalSpace;
 import static com.falsepattern.endlessids.mixin.plugin.TargetMod.RandomThings;
 import static com.falsepattern.endlessids.mixin.plugin.TargetMod.RealisticTerrainGeneration;
 import static com.falsepattern.endlessids.mixin.plugin.TargetMod.RealisticWorldGen;
@@ -341,6 +342,11 @@ public enum Mixin implements IMixins {
                       Ext.Biome,
                       require(OldWorldGen),
                       common("biome.owg.ChunkGeneratorBetaMixin")),
+
+    Biome_PersonalSpace(Phase.LATE,
+                        Ext.Biome,
+                        require(PersonalSpace),
+                        common("biome.personalspace.PersonalChunkProviderMixin")),
 
     Biome_RandomThings(Phase.EARLY,
                        Ext.Biome,

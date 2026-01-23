@@ -45,7 +45,7 @@ import static com.falsepattern.endlessids.constants.ExtendedConstants.blocksPerS
 import static com.falsepattern.endlessids.util.DataUtil.*;
 
 //NOTE: Also change the save logic in MapWriter mod if changing this
-public class BlockIDManager implements DataManager.PacketDataManager, DataManager.SubChunkDataManager, DataManager.BlockPacketDataManager {
+public class BlockIDManager implements DataManager.PacketDataManager, DataManager.CubicPacketDataManager, DataManager.SubChunkDataManager, DataManager.BlockPacketDataManager {
 
     @Override
     public String domain() {
@@ -258,5 +258,78 @@ public class BlockIDManager implements DataManager.PacketDataManager, DataManage
     @Override
     public void readBlockPacketFromBuffer(S23PacketBlockChange packet, PacketBuffer buffer) {
         packet.field_148883_d = Block.getBlockById(buffer.readInt());
+    }
+
+    @Override
+    public int maxPacketSizeCubic() {
+        return 3 * 16 * 16 * 16 + 4;
+    }
+
+    @Override
+    public void writeToBuffer(Chunk chunk, ExtendedBlockStorage extendedBlockStorage, ByteBuffer data) {
+        val subChunk = (SubChunkBlockHook) extendedBlockStorage;
+
+        data.put((byte) subChunk.eid$getBlockMask());
+
+        val b1 = subChunk.eid$getB1();
+        data.put(b1);
+
+        val b2Low = subChunk.eid$getB2Low();
+        if (b2Low == null) return;
+        data.put(b2Low.data);
+
+        val b2High = subChunk.eid$getB2High();
+        if (b2High == null) return;
+        data.put(b2High.data);
+
+        val b3 = subChunk.eid$getB3();
+        if (b3 != null) {
+            data.put(b3);
+        }
+    }
+
+    @Override
+    public void readFromBuffer(Chunk chunk, ExtendedBlockStorage extendedBlockStorage, ByteBuffer data) {
+        val subChunk = (SubChunkBlockHook) extendedBlockStorage;
+        val storageFlag = data.get();
+
+        val b1 = subChunk.eid$getB1();
+        data.get(b1);
+
+        if (storageFlag == 0b00) {
+            subChunk.eid$setB2Low(null);
+            subChunk.eid$setB2High(null);
+            subChunk.eid$setB3(null);
+            return;
+        }
+
+        var b2Low = subChunk.eid$getB2Low();
+        if (b2Low == null) {
+            b2Low = subChunk.eid$createB2Low();
+        }
+        data.get(b2Low.data);
+
+        if (storageFlag == 0b01) {
+            subChunk.eid$setB2High(null);
+            subChunk.eid$setB3(null);
+            return;
+        }
+
+        var b2High = subChunk.eid$getB2High();
+        if (b2High == null) {
+            b2High = subChunk.eid$createB2High();
+        }
+        data.get(b2High.data);
+
+        if (storageFlag == 0b10) {
+            subChunk.eid$setB3(null);
+            return;
+        }
+
+        var b3 = subChunk.eid$getB3();
+        if (b3 == null) {
+            b3 = subChunk.eid$createB3();
+        }
+        data.get(b3);
     }
 }
