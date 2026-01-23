@@ -80,6 +80,7 @@ public enum TargetMod implements ITargetMod {
     NomadicTents("com.yurtmod.main.NomadicTents"),
     NuclearTech("com.hbm.main.MainRegistry"),
     OldWorldGen("owg.OWG"),
+    PersonalSpace("me.eigenraven.personalspace.PersonalSpaceMod"),
     Ruins("atomicstryker.ruins.common.RuinsMod"),
     RealisticTerrainGeneration("rtg.RTG"),
     RealisticWorldGen("rwg.RWG"),

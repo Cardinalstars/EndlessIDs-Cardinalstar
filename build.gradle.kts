@@ -210,6 +210,9 @@ dependencies {
     //Nostalgic World Generation 1.0.0
     compileOnly(deobfCurse("nostalgiagenerator-927053:4816167"))
 
+    //Factorization 0.8.109
+    compileOnly(deobfCurse("PersonalSpace-819596:6536785"))
+
     //RandomThings 2.2.4
     compileOnly(deobfCurse("randomthings-59816:2225310"))
 
