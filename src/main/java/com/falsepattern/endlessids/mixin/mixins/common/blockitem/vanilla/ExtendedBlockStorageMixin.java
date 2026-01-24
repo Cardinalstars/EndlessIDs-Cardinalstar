@@ -189,19 +189,6 @@ public abstract class ExtendedBlockStorageMixin implements SubChunkBlockHook {
         setExtBlockMetadata(x, y, z, id);
     }
 
-    @Redirect(method = "removeInvalidBlocks",
-              at = @At(value = "INVOKE",
-                       target = "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;getBlockByExtId(III)Lnet/minecraft/block/Block;"),
-              require = 1)
-    private Block removeInvalidBlocks(ExtendedBlockStorage instance, int x, int y, int z) {
-        var block = instance.getBlockByExtId(x, y, z);
-        if (block == null && GeneralConfig.removeInvalidBlocks) {
-            instance.func_150818_a(x, y, z, Blocks.air);
-            block = Blocks.air;
-        }
-        return block;
-    }
-
     private UnsupportedOperationException emergencyCrash() {
         val crashMSG = "A mod that is incompatible with " + Tags.MODNAME + " has tried to access the block array of a" +
                        " chunk like in vanilla! Crashing in fear of potential world corruption!\n" +

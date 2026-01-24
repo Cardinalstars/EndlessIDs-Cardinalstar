@@ -418,7 +418,11 @@ public enum Mixin implements IMixins {
     // endregion Biome
 
     // region BlockItem
-
+    
+    BlockItem_Thermos(Phase.EARLY,
+                      () -> { return Ext.BlockItem.getAsBoolean() && !hasThermos(); },
+                      common("blockitem.thermos.ExtendedBlockStorageMixin")),
+    
     BlockItem_Vanilla(Phase.EARLY,
                       Ext.BlockItem,
                       common("blockitem.vanilla.BlockFireMixin",
@@ -606,5 +610,17 @@ public enum Mixin implements IMixins {
         public static final BooleanSupplier Enchantment = () -> GeneralConfig.extendEnchantment;
         public static final BooleanSupplier Potion = () -> GeneralConfig.extendPotion;
         public static final BooleanSupplier Entity = () -> GeneralConfig.extendEntity;
+    }
+
+    static boolean hasThermos()
+    {
+        try
+        {
+            Class.forName("thermos.Thermos");
+            return true;
+        }
+        catch(ClassNotFoundException ignored) {
+            return false;
+        }
     }
 }
