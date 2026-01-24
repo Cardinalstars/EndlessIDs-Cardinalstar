@@ -4,7 +4,7 @@
  * Copyright (C) 2022-2025 FalsePattern, The MEGA Team
  * All Rights Reserved
  *
- * The above copyright notice, this permission notice and the words "MEGA"
+ * The above copyright notice, this permission notice and the word "MEGA"
  * shall be included in all copies or substantial portions of the Software.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.falsepattern.endlessids.mixin.mixins.common.blockitem.vanilla;
+package com.falsepattern.endlessids.mixin.mixins.common.blockitem.common;
 
 import com.falsepattern.endlessids.constants.ExtendedConstants;
 import com.falsepattern.endlessids.constants.VanillaConstants;
@@ -28,14 +28,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-import net.minecraft.network.play.server.S24PacketBlockAction;
+import net.minecraft.world.World;
 
-@Mixin(S24PacketBlockAction.class)
-public abstract class S24PacketBlockActionMixin {
-    @ModifyConstant(method = {"readPacketData", "writePacketData"},
-                    constant = @Constant(intValue = VanillaConstants.blockIDMask),
-                    require = 2)
-    private int extend1(int constant) {
-        return ExtendedConstants.blockIDMask;
+@Mixin(World.class)
+public abstract class WorldMixin {
+    @ModifyConstant(method = "func_147480_a",
+                    constant = @Constant(intValue = VanillaConstants.bitsPerID),
+                    require = 1)
+    private int modifySoundShift(int original) {
+        return ExtendedConstants.bitsPerID;
     }
 }
