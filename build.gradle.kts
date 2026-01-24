@@ -88,14 +88,6 @@ dependencies {
     // endregion
 
     // region unmaintained mods
-
-    devOnlyNonPublishable("com.github.GTNewHorizons:Galaxy-Space-GTNH:1.1.126-GTNH:dev") { isTransitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:Galacticraft:3.4.15-GTNH:dev") { isTransitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.8.50-GTNH:dev") { isTransitive = false}
-    devOnlyNonPublishable("com.github.GTNewHorizons:CodeChickenCore:1.4.7:dev") { isTransitive = false}
-    devOnlyNonPublishable("curse.maven:industrial-craft-242638:6833054") { isTransitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:TinkersConstruct:1.14.17-GTNH:dev") { isTransitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:Mantle:0.5.1:dev")
     
     //AbyssalCraft 1.9.1.3-FINAL
     compileOnly(deobfCurse("abyssalcraft-53686:2311135"))

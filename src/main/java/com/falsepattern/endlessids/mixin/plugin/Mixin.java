@@ -277,7 +277,7 @@ public enum Mixin implements IMixins {
                        common("biome.galacticraft.ChunkProviderOrbitMixin",
                               "biome.galacticraft.ConfigManagerCoreMixin")),
 
-    Biome_GalaxySpace(Phase.EARLY,
+    Biome_GalaxySpace(Phase.LATE,
                       Ext.Biome,
                       require(GalaxySpace),
                       common("biome.galaxyspace.ChunkProviderKuiperMixin",
@@ -434,7 +434,8 @@ public enum Mixin implements IMixins {
                              "blockitem.vanilla.S22PacketMultiBlockChangeMixin",
                              "blockitem.vanilla.S24PacketBlockActionMixin",
                              "blockitem.vanilla.StatListMixin",
-                             "blockitem.vanilla.WorldMixin"),
+                             "blockitem.vanilla.WorldMixin",
+                             "blockitem.thermos.NibbleArrayMixin"),
                       client("blockitem.vanilla.PlayerControllerMPMixin",
                              "blockitem.vanilla.RenderGlobalMixin")),
 
