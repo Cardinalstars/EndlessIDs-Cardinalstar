@@ -25,28 +25,30 @@ package com.falsepattern.endlessids.mixin.mixins.common.biome.galaxyspace;
 import com.falsepattern.endlessids.mixin.helpers.BiomePatchHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.ChunkProviderGenerate;
 
 @Pseudo
 @Mixin(targets = "galaxyspace.core.dimension.ChunkProviderSpaceLakes",
        remap = false)
 
-public abstract class ChunkProviderSpaceLakesGTNHMixin 
+public abstract class ChunkProviderSpaceLakesGTNHMixin extends ChunkProviderGenerate
 {
-    @Shadow
-    protected BiomeGenBase[] biomesForGeneration;
+
+    public ChunkProviderSpaceLakesGTNHMixin(World p_i2006_1_, long p_i2006_2_, boolean p_i2006_4_) {
+        super(p_i2006_1_, p_i2006_2_, p_i2006_4_);
+    }
 
     /**
      * @author Cardinalstar16
      * @reason The Galaxy-space mod maintained by GTNH has a different class layout than
-     * non-GTNH versions of galaxy space. Additionally, biomesForGeneration must be 
-     * shadowed with protected access rather than private since GTNH galaxy space also applies
-     * an access transformer on the biomesForGenerationField.
+     * non-GTNH versions of galaxy space. More importantly, biomesForGeneration is AT'd to be protected,
+     * but cannot be shadowed due to the fact that private members aren't in the byte code of the 
+     * children classes (from what I understand).
      */
     @SuppressWarnings("UnresolvedMixinReference")
     @Redirect(method = "func_73154_d",

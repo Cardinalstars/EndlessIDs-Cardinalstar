@@ -14,11 +14,11 @@ minecraft_fp {
 
     mixin {
         pkg = "mixin.mixins"
-        debug = true
     }
 
     core {
         coreModClass = "asm.EndlessIDsCore"
+        accessTransformerFile = "endlessids_at.cfg"
     }
 
     tokens {
@@ -69,7 +69,7 @@ dependencies {
     // region Our deps
     implementationSplit("com.falsepattern:falsepatternlib-mc1.7.10:1.9.0")
     compileOnly("it.unimi.dsi:fastutil:8.5.16")
-    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.6.4")
+    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.7.0-alpha-01")
     // endregion
 
     // region maintained mods
