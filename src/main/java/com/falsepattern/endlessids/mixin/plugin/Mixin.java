@@ -283,6 +283,7 @@ public enum Mixin implements IMixins {
                       common("biome.galaxyspace.ChunkProviderKuiperMixin",
                              "biome.galaxyspace.ChunkProviderMarsSSMixin",
                              "biome.galaxyspace.ChunkProviderSpaceLakesMixin",
+                             "biome.galaxyspace.ChunkProviderSpaceLakesGTNHMixin",
                              "biome.galaxyspace.ChunkProviderVenusSSMixin")),
 
     Biome_Highlands(Phase.LATE,

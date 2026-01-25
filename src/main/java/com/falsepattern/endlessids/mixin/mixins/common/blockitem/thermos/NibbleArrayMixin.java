@@ -39,10 +39,14 @@ public class NibbleArrayMixin {
     @Shadow private int depthBits;     // depthBits
     @Shadow private int depthBitsPlusFour;     // depthBitsPlusFour
     
+    @SuppressWarnings("MixinAnnotationTarget")
     @Shadow private int length;
+    @SuppressWarnings("MixinAnnotationTarget")
     @Shadow private byte trivialByte;
+    @SuppressWarnings("MixinAnnotationTarget")
     @Shadow private byte trivialValue;
     
+        @SuppressWarnings("MixinAnnotationTarget")
         @Inject(
                 method = "detectAndProcessTrivialArray",
                 at = @At(
