@@ -9,7 +9,6 @@ minecraft_fp {
         modid = "endlessids"
         name = "EndlessIDs"
         rootPkg = "$group.endlessids"
-        version = "1.6.14"
     }
 
     mixin {
@@ -56,8 +55,6 @@ minecraft_fp {
 }
 
 repositories {
-    maven("https://maven.curseforge.com")
-    maven("https://nexus.gtnewhorizons.com/repository/public/")
     cursemavenEX()
     modrinthEX()
     exclusive(mavenpattern(), "com.falsepattern")
@@ -69,7 +66,7 @@ dependencies {
     // region Our deps
     implementationSplit("com.falsepattern:falsepatternlib-mc1.7.10:1.9.0")
     compileOnly("it.unimi.dsi:fastutil:8.5.16")
-    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.7.0-alpha-01")
+    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.6.4")
     // endregion
 
     // region maintained mods
@@ -89,7 +86,7 @@ dependencies {
     // endregion
 
     // region unmaintained mods
-    
+
     //AbyssalCraft 1.9.1.3-FINAL
     compileOnly(deobfCurse("abyssalcraft-53686:2311135"))
 

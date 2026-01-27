@@ -35,9 +35,9 @@ import net.minecraft.world.chunk.NibbleArray;
 public class NibbleArrayMixin {
 
     @Shadow
-    public byte[] data; // Thermos renamed 'data'
-    @Shadow private int depthBits;     // depthBits
-    @Shadow private int depthBitsPlusFour;     // depthBitsPlusFour
+    public byte[] data;                     // Thermos renamed 'data'
+    @Shadow private int depthBits;          // depthBits
+    @Shadow private int depthBitsPlusFour;  // depthBitsPlusFour
     
     @SuppressWarnings("MixinAnnotationTarget")
     @Shadow private int length;
@@ -45,21 +45,33 @@ public class NibbleArrayMixin {
     @Shadow private byte trivialByte;
     @SuppressWarnings("MixinAnnotationTarget")
     @Shadow private byte trivialValue;
-    
-        @SuppressWarnings("MixinAnnotationTarget")
-        @Inject(
-                method = "detectAndProcessTrivialArray",
-                at = @At(
-                        value = "FIELD",
-                        opcode = Opcodes.PUTFIELD,
-                        target = "Lnet/minecraft/world/chunk/NibbleArray;data:[B",
-                        shift = At.Shift.BEFORE
-                ),
-                cancellable = true)
-        private void logBeforeNull(CallbackInfo ci) {
-            ci.cancel();
-        }
 
+    /**
+     * @author Cardinalstar16
+     * @reason Thermos compat.
+     * Thermos thinks it's a good idea to nullify some nibble array members if they are a
+     * "Trivial array". Just disable this functionality if we detect thermos.
+     */
+    @SuppressWarnings("MixinAnnotationTarget")
+    @Inject(
+            method = "detectAndProcessTrivialArray",
+            at = @At(
+                    value = "FIELD",
+                    opcode = Opcodes.PUTFIELD,
+                    target = "Lnet/minecraft/world/chunk/NibbleArray;data:[B",
+                    shift = At.Shift.BEFORE
+            ),
+            cancellable = true)
+    private void logBeforeNull(CallbackInfo ci) {
+        ci.cancel();
+    }
+
+    /**
+     * @author Cardinalstar16
+     * @reason Thermos compat.
+     * Thermos thinks it's a good idea to nullify some nibble array members if they are a
+     * "Trivial array". Just disable this functionality if we detect thermos.
+     */
     @Inject(method = "<init>(II)V", at = @At("RETURN"))
     private void fixConstructor(int par1, int par2, CallbackInfo ci) {
         this.data = new byte[par1 >> 1];

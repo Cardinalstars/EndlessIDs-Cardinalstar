@@ -35,6 +35,12 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 @Mixin(ExtendedBlockStorage.class)
 public class ExtendedBlockStorageMixin
 {
+    /**
+     * @author Cardinalstar16
+     * @reason Id Extension
+     * Thermos does this already, so I just moved this into a mixin that is only loaded if thermos
+     * is not enabled.
+     */
     @Redirect(method = "removeInvalidBlocks",
               at = @At(value = "INVOKE",
                        target = "Lnet/minecraft/world/chunk/storage/ExtendedBlockStorage;getBlockByExtId(III)Lnet/minecraft/block/Block;"),
