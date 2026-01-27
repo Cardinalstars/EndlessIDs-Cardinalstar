@@ -2,6 +2,7 @@
  * EndlessIDs
  *
  * Copyright (C) 2022-2025 FalsePattern, The MEGA Team
+ * Copyright (C) 2025 Cardinalstar16
  * All Rights Reserved
  *
  * The above copyright notice, this permission notice and the word "MEGA"
