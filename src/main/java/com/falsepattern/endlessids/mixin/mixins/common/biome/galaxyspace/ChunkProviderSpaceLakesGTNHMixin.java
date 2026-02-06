@@ -1,8 +1,7 @@
 /*
  * EndlessIDs
  *
- * Copyright (C) 2022-2025 FalsePattern, The MEGA Team
- * Copyright (C) 2025 Cardinalstar16
+ * Copyright (C) 2022-2026 FalsePattern, The MEGA Team
  * All Rights Reserved
  *
  * The above copyright notice, this permission notice and the word "MEGA"
@@ -33,10 +32,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 
+/**
+ * @author Cardinalstar16
+ */
 @Pseudo
 @Mixin(targets = "galaxyspace.core.dimension.ChunkProviderSpaceLakes",
        remap = false)
-
 public abstract class ChunkProviderSpaceLakesGTNHMixin extends ChunkProviderGenerate
 {
 

@@ -1,8 +1,7 @@
 /*
  * EndlessIDs
  *
- * Copyright (C) 2022-2025 FalsePattern, The MEGA Team
- * Copyright (C) 2025 Cardinalstar16
+ * Copyright (C) 2022-2026 FalsePattern, The MEGA Team
  * All Rights Reserved
  *
  * The above copyright notice, this permission notice and the word "MEGA"
@@ -32,6 +31,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.world.chunk.NibbleArray;
 
+/**
+ * @author Cardinalstar16
+ */
 @Mixin(NibbleArray.class)
 public class NibbleArrayMixin {
 
