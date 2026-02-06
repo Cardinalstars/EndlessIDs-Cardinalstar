@@ -20,9 +20,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.falsepattern.endlessids.mixin.mixins.common.blockitem.vanilla;
+package com.falsepattern.endlessids.mixin.mixins.common.blockitem.common;
 
-import com.falsepattern.endlessids.constants.VanillaConstants;
 import com.falsepattern.endlessids.util.DataUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;

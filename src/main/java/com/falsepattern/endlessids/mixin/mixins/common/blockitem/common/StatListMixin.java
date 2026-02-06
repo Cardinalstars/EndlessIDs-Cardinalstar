@@ -20,7 +20,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.falsepattern.endlessids.mixin.mixins.common.blockitem.vanilla;
+package com.falsepattern.endlessids.mixin.mixins.common.blockitem.common;
 
 import com.falsepattern.endlessids.constants.ExtendedConstants;
 import com.falsepattern.endlessids.constants.VanillaConstants;
@@ -28,14 +28,22 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-import net.minecraft.world.World;
+import net.minecraft.stats.StatList;
 
-@Mixin(World.class)
-public abstract class WorldMixin {
-    @ModifyConstant(method = "func_147480_a",
-                    constant = @Constant(intValue = VanillaConstants.bitsPerID),
+@Mixin(StatList.class)
+public abstract class StatListMixin {
+    @ModifyConstant(method = "<clinit>",
+                    constant = {@Constant(intValue = VanillaConstants.blockIDCount)},
                     require = 1)
-    private int modifySoundShift(int original) {
-        return ExtendedConstants.bitsPerID;
+    private static int modifyMineBlockStatArraySize(int constant) {
+        return ExtendedConstants.blockIDCount;
     }
+
+    @ModifyConstant(method = "<clinit>",
+                    constant = {@Constant(intValue = VanillaConstants.itemIDCount)},
+                    require = 3)
+    private static int modifyItemStatArraysSize(int constant) {
+        return ExtendedConstants.itemIDCount;
+    }
+
 }

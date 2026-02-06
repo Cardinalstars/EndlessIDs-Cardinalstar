@@ -17,6 +17,7 @@ minecraft_fp {
 
     core {
         coreModClass = "asm.EndlessIDsCore"
+        accessTransformerFile = "endlessids_at.cfg"
     }
 
     tokens {

@@ -20,7 +20,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.falsepattern.endlessids.mixin.mixins.common.blockitem.vanilla;
+package com.falsepattern.endlessids.mixin.mixins.common.blockitem.common;
 
 import io.netty.buffer.ByteBuf;
 import org.spongepowered.asm.mixin.Mixin;

@@ -278,12 +278,13 @@ public enum Mixin implements IMixins {
                        common("biome.galacticraft.ChunkProviderOrbitMixin",
                               "biome.galacticraft.ConfigManagerCoreMixin")),
 
-    Biome_GalaxySpace(Phase.EARLY,
+    Biome_GalaxySpace(Phase.LATE,
                       Ext.Biome,
                       require(GalaxySpace),
                       common("biome.galaxyspace.ChunkProviderKuiperMixin",
                              "biome.galaxyspace.ChunkProviderMarsSSMixin",
                              "biome.galaxyspace.ChunkProviderSpaceLakesMixin",
+                             "biome.galaxyspace.ChunkProviderSpaceLakesGTNHMixin",
                              "biome.galaxyspace.ChunkProviderVenusSSMixin")),
 
     Biome_Highlands(Phase.LATE,
@@ -424,19 +425,26 @@ public enum Mixin implements IMixins {
     // endregion Biome
 
     // region BlockItem
-
+    
     BlockItem_Vanilla(Phase.EARLY,
+                      () -> { return Ext.BlockItem.getAsBoolean() && !hasThermos(); },
+                      common("blockitem.vanilla.ExtendedBlockStorageMixin")),
+    BlockItem_Thermos(Phase.EARLY,
+                      () -> { return Ext.BlockItem.getAsBoolean() && hasThermos(); },
+                      common("blockitem.thermos.NibbleArrayMixin")),
+    
+    BlockItem_Common(Phase.EARLY,
                       Ext.BlockItem,
-                      common("blockitem.vanilla.BlockFireMixin",
-                             "blockitem.vanilla.BlockMixin",
-                             "blockitem.vanilla.ExtendedBlockStorageMixin",
-                             "blockitem.vanilla.ItemInWorldManagerMixin",
-                             "blockitem.vanilla.ItemStackMixin",
-                             "blockitem.vanilla.PacketBufferMixin",
-                             "blockitem.vanilla.S22PacketMultiBlockChangeMixin",
-                             "blockitem.vanilla.S24PacketBlockActionMixin",
-                             "blockitem.vanilla.StatListMixin",
-                             "blockitem.vanilla.WorldMixin"),
+                      common("blockitem.common.BlockFireMixin",
+                             "blockitem.common.BlockMixin",
+                             "blockitem.common.ExtendedBlockStorageMixin",
+                             "blockitem.common.ItemInWorldManagerMixin",
+                             "blockitem.common.ItemStackMixin",
+                             "blockitem.common.PacketBufferMixin",
+                             "blockitem.common.S22PacketMultiBlockChangeMixin",
+                             "blockitem.common.S24PacketBlockActionMixin",
+                             "blockitem.common.StatListMixin",
+                             "blockitem.common.WorldMixin"),
                       client("blockitem.vanilla.PlayerControllerMPMixin",
                              "blockitem.vanilla.RenderGlobalMixin")),
 
@@ -612,5 +620,17 @@ public enum Mixin implements IMixins {
         public static final BooleanSupplier Enchantment = () -> GeneralConfig.extendEnchantment;
         public static final BooleanSupplier Potion = () -> GeneralConfig.extendPotion;
         public static final BooleanSupplier Entity = () -> GeneralConfig.extendEntity;
+    }
+
+    static boolean hasThermos()
+    {
+        try
+        {
+            Class.forName("thermos.Thermos");
+            return true;
+        }
+        catch(ClassNotFoundException ignored) {
+            return false;
+        }
     }
 }
