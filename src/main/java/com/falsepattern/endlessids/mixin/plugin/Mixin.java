@@ -275,7 +275,8 @@ public enum Mixin implements IMixins {
                        Ext.Biome,
                        require(GalactiCraftCore),
                        common("biome.galacticraft.ChunkProviderOrbitMixin",
-                              "biome.galacticraft.ConfigManagerCoreMixin")),
+                              "biome.galacticraft.ConfigManagerCoreMixin",
+                              "biome.galacticraft.ChunkProviderSpaceMixin")),
 
     Biome_GalaxySpace(Phase.LATE,
                       Ext.Biome,
