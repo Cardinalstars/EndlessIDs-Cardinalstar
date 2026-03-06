@@ -66,7 +66,7 @@ dependencies {
     // region Our deps
     implementationSplit("com.falsepattern:falsepatternlib-mc1.7.10:1.9.0")
     compileOnly("it.unimi.dsi:fastutil:8.5.16")
-    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.6.4")
+    implementationSplit("com.falsepattern:chunkapi-mc1.7.10:0.8.0")
     // endregion
 
     // region maintained mods
@@ -210,6 +210,9 @@ dependencies {
 
     //Nostalgic World Generation 1.0.0
     compileOnly(deobfCurse("nostalgiagenerator-927053:4816167"))
+
+    //Personal Space 1.0.33
+    compileOnly(deobfCurse("PersonalSpace-819596:6536785"))
 
     //RandomThings 2.2.4
     compileOnly(deobfCurse("randomthings-59816:2225310"))

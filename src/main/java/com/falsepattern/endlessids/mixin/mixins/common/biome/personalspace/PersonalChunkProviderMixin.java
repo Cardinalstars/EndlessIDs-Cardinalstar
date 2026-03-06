@@ -20,22 +20,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.falsepattern.endlessids.mixin.mixins.common.biome.lotr;
+package com.falsepattern.endlessids.mixin.mixins.common.biome.personalspace;
 
-import com.falsepattern.endlessids.constants.ExtendedConstants;
-import com.falsepattern.endlessids.constants.VanillaConstants;
-import lotr.common.LOTRDimension;
+import com.falsepattern.endlessids.mixin.helpers.BiomePatchHelper;
+import me.eigenraven.personalspace.world.PersonalChunkProvider;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
 
-@Mixin(value = LOTRDimension.class,
-       remap = false)
-public abstract class LOTRDimensionMixin {
-    @ModifyConstant(method = "<init>",
-                    constant = @Constant(intValue = VanillaConstants.biomeIDCount),
-                    require = 1)
-    private int extendBiomes(int constant) {
-        return ExtendedConstants.biomeIDCount;
+@Mixin(PersonalChunkProvider.class)
+public class PersonalChunkProviderMixin {
+
+    @Shadow private int savedBiomeId = -1;
+
+    @Redirect(method = "provideChunk",
+              at = @At(value = "INVOKE",
+                       target = "Lnet/minecraft/world/chunk/Chunk;getBiomeArray()[B"),
+              require = 1)
+    private byte[] setBiomesTweaked(Chunk instance) {
+        return BiomePatchHelper.getBiomeArrayTweaked(instance, i -> BiomeGenBase.getBiome(savedBiomeId));
     }
 }

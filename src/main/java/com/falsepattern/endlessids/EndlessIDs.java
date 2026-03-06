@@ -1,10 +1,10 @@
 /*
  * EndlessIDs
  *
- * Copyright (C) 2022-2025 FalsePattern, The MEGA Team
+ * Copyright (C) 2022-2026 FalsePattern, The MEGA Team
  * All Rights Reserved
  *
- * The above copyright notice, this permission notice and the words "MEGA"
+ * The above copyright notice, this permission notice and the word "MEGA"
  * shall be included in all copies or substantial portions of the Software.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -42,7 +42,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
      version = Tags.VERSION,
      name = Tags.MODNAME,
      acceptedMinecraftVersions = "[1.7.10]",
-     dependencies = "required-after:chunkapi@[0.6.4,);" +
+     dependencies = "required-after:chunkapi@[0.8.0,);" +
                     "required-after:falsepatternlib@[1.9.0,);" +
                     "after:antiidconflict")
 public class EndlessIDs {

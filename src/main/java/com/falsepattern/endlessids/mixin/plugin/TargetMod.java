@@ -1,7 +1,7 @@
 /*
  * EndlessIDs
  *
- * Copyright (C) 2022-2025 FalsePattern, The MEGA Team
+ * Copyright (C) 2022-2026 FalsePattern, The MEGA Team
  * All Rights Reserved
  *
  * The above copyright notice, this permission notice and the word "MEGA"
@@ -80,6 +80,7 @@ public enum TargetMod implements ITargetMod {
     NomadicTents("com.yurtmod.main.NomadicTents"),
     NuclearTech("com.hbm.main.MainRegistry"),
     OldWorldGen("owg.OWG"),
+    PersonalSpace("me.eigenraven.personalspace.PersonalSpaceMod"),
     Ruins("atomicstryker.ruins.common.RuinsMod"),
     RealisticTerrainGeneration("rtg.RTG"),
     RealisticWorldGen("rwg.RWG"),
